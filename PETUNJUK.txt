@@ -2,6 +2,8 @@
 
 Paket ini berisi:
 - `index.html` — dashboard untuk GitHub Pages.
+- `logo-sda.png` — logo sekolah pada header dashboard.
+- `favicon.png` — ikon tab browser.
 - `Code.gs` — API Google Apps Script yang membaca Google Sheets respons Google Form.
 
 ## A. Pasang API Google Apps Script
@@ -32,7 +34,7 @@ Catatan privasi:
 ## C. Hosting di GitHub Pages
 
 1. Buat repository GitHub baru, misalnya `dashboard-survei-sda`.
-2. Unggah `index.html` ke root repository.
+2. Unggah `index.html`, `logo-sda.png`, dan `favicon.png` ke root repository (folder yang sama).
 3. Buka **Settings → Pages**.
 4. Pada **Build and deployment**, pilih **Deploy from a branch**.
 5. Pilih branch `main` dan folder `/ (root)`, lalu Save.
