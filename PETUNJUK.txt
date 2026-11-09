@@ -1,0 +1,49 @@
+# Dashboard Survei Pembelajaran 5 Hari Sekolah — SD Aisyiyah Slawi
+
+Paket ini berisi:
+- `index.html` — dashboard untuk GitHub Pages.
+- `Code.gs` — API Google Apps Script yang membaca Google Sheets respons Google Form.
+
+## A. Pasang API Google Apps Script
+
+1. Buka Google Sheets yang terhubung ke Google Form.
+2. Pastikan nama tab respons adalah `Form Responses 1` (sesuai file Excel yang diberikan).
+3. Pilih **Ekstensi → Apps Script**.
+4. Hapus kode contoh, lalu salin seluruh isi file `Code.gs` ke editor Apps Script.
+5. Klik **Deploy → New deployment**.
+6. Pilih jenis **Web app**.
+7. Atur **Execute as: Me** dan **Who has access: Anyone**.
+8. Klik Deploy, berikan izin yang diminta, lalu salin URL Web App yang berakhiran `/exec`.
+
+Catatan privasi:
+- Web App mengirimkan jumlah jawaban, kelas, pilihan persetujuan, dan alasan/masukan.
+- Kolom nama santri dan nama wali santri tidak pernah dikirim ke dashboard.
+- Karena dashboard bersifat publik, jawaban alasan/masukan akan terlihat publik. Tinjau dahulu apakah ada informasi pribadi di kolom tersebut. Jika perlu, hapus bagian alasan dari keluaran publik atau gunakan dashboard internal.
+
+## B. Hubungkan HTML ke Apps Script
+
+1. Buka `index.html` dengan editor teks.
+2. Cari baris:
+   `const API_URL = "TEMPEL_URL_WEB_APP_APPS_SCRIPT_DI_SINI";`
+3. Ganti teks di dalam tanda kutip dengan URL Web App yang disalin, misalnya:
+   `const API_URL = "https://script.google.com/macros/s/ID_DEPLOYMENT/exec";`
+4. Simpan file.
+
+## C. Hosting di GitHub Pages
+
+1. Buat repository GitHub baru, misalnya `dashboard-survei-sda`.
+2. Unggah `index.html` ke root repository.
+3. Buka **Settings → Pages**.
+4. Pada **Build and deployment**, pilih **Deploy from a branch**.
+5. Pilih branch `main` dan folder `/ (root)`, lalu Save.
+6. Tunggu proses selesai. GitHub akan memberikan alamat publik GitHub Pages.
+
+## D. Penyesuaian jika nama tab atau header berubah
+
+- Nama tab diatur pada `SHEET_NAME` di bagian atas `Code.gs`.
+- Kode mendeteksi kolom `Kelas`, pertanyaan yang mengandung frasa persetujuan/5 hari sekolah, serta kolom alasan/pertimbangan.
+- Jika struktur kolom Google Form berubah, sesuaikan konfigurasi atau fungsi pencarian header di `Code.gs`.
+
+## E. Pembaruan data
+
+Dashboard meminta data saat halaman dibuka dan mengulang pembaruan setiap 60 detik. Tidak perlu mengunggah ulang HTML ketika ada respons baru.

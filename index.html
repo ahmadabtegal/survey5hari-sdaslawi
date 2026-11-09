@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12345a">
+  <title>Dashboard Survei | SD Aisyiyah Slawi</title>
+  <style>
+    :root{--navy:#12345a;--navy2:#1b4774;--blue:#2878c7;--teal:#159b8b;--gold:#e7a93b;--red:#d65b62;--ink:#172b43;--muted:#718096;--line:#e5ebf2;--bg:#f3f6fa;--white:#fff;--shadow:0 10px 30px rgba(22,48,78,.07)}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    .hero{background:linear-gradient(120deg,#102c4d,#1c5485);color:#fff;padding:30px max(22px,calc((100% - 1180px)/2)) 34px;position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;width:360px;height:360px;border:1px solid #ffffff20;border-radius:50%;right:7%;top:-230px;box-shadow:0 0 0 38px #ffffff09,0 0 0 78px #ffffff07}
+    .brand{display:flex;align-items:center;gap:13px;position:relative;z-index:1}.logo{width:48px;height:48px;border-radius:14px;background:#fff;color:var(--navy);display:grid;place-items:center;font-size:21px;font-weight:900;letter-spacing:-1px}
+    .brand strong{font-size:15px;letter-spacing:.07em}.brand small{display:block;color:#c9d9e9;font-size:11px;letter-spacing:.13em;margin-top:3px}
+    h1{font-size:clamp(25px,4vw,37px);line-height:1.15;margin:28px 0 8px;max-width:760px;position:relative;z-index:1}.subtitle{color:#d3e2f0;margin:0;font-size:14px;position:relative;z-index:1}
+    .wrap{max-width:1180px;margin:-1px auto 0;padding:24px 22px 46px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}.updated{font-size:12px;color:var(--muted)}.actions{display:flex;gap:9px;align-items:center}
+    button,select{font:inherit;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 13px;color:var(--ink)}button{cursor:pointer;font-weight:650}button.primary{background:var(--navy);border-color:var(--navy);color:#fff}button:hover{filter:brightness(.97)}select{min-width:145px}
+    .status{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}.dot{width:8px;height:8px;border-radius:50%;background:var(--teal);display:inline-block}.dot.off{background:var(--red)}
+    .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:16px}.card{background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.stat{padding:19px 20px;min-height:120px}.stat-label{font-size:12px;color:var(--muted);font-weight:650}.stat-value{font-size:32px;font-weight:800;letter-spacing:-1px;margin:8px 0 3px}.stat-note{font-size:11px;color:var(--muted)}
+    .content-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;margin-bottom:16px}.panel{padding:20px}.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:18px}.panel h2{font-size:15px;margin:0}.panel p{font-size:12px;color:var(--muted);margin:5px 0 0}
+    .chart-area{display:flex;align-items:center;gap:25px;min-height:220px}.donut{width:190px;height:190px;border-radius:50%;flex:0 0 auto;position:relative;background:conic-gradient(#2878c7 0 0,#159b8b 0 0,#e7a93b 0 0,#d65b62 0 0)}.donut:after{content:"";position:absolute;inset:28px;background:#fff;border-radius:50%}.donut-center{position:absolute;inset:0;z-index:1;display:grid;place-content:center;text-align:center}.donut-center b{font-size:27px}.donut-center span{font-size:11px;color:var(--muted)}
+    .legend{display:grid;gap:13px;flex:1}.legend-row{display:flex;justify-content:space-between;gap:10px;font-size:12px}.legend-label{display:flex;align-items:center;gap:8px}.swatch{width:9px;height:9px;border-radius:3px;display:inline-block}.legend-row b{font-size:12px}
+    .bar-list{display:grid;gap:16px}.bar-item-head{display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px}.bar-track{height:10px;border-radius:20px;background:#edf1f6;overflow:hidden;display:flex}.bar-fill{height:100%;min-width:0;transition:width .3s}
+    .class-table{width:100%;border-collapse:collapse;font-size:12px}.class-table th{text-align:left;color:var(--muted);font-weight:650;padding:10px 8px;border-bottom:1px solid var(--line)}.class-table td{padding:12px 8px;border-bottom:1px solid #eef2f6}.class-table tr:last-child td{border:0}.num{text-align:right;font-variant-numeric:tabular-nums}.pill{display:inline-block;border-radius:30px;background:#eaf3fc;color:#2466a3;padding:4px 8px;font-weight:700;font-size:11px}
+    .reason-list{display:grid;gap:9px}.reason{background:#f7f9fc;border:1px solid #edf1f5;border-radius:10px;padding:12px 13px;font-size:12px;line-height:1.55;color:#43536a;overflow-wrap:anywhere}.empty{color:var(--muted);font-size:13px;text-align:center;padding:28px 10px}.footer{text-align:center;color:#8a97a8;font-size:11px;padding:18px}
+    .error{display:none;background:#fff4f3;border:1px solid #f4d0cc;color:#a33c3c;padding:12px 14px;border-radius:10px;font-size:12px;margin-bottom:15px}.loading{opacity:.55;pointer-events:none}
+    @media(max-width:1000px){.stats{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}.chart-area{justify-content:center}.hero{padding-top:24px}}
+    @media(max-width:480px){.wrap{padding:18px 13px 32px}.stats{gap:9px}.stat{padding:14px;min-height:105px}.stat-value{font-size:27px}.panel{padding:16px}.chart-area{flex-direction:column}.donut{width:175px;height:175px}.legend{width:100%}.toolbar{align-items:flex-start}.actions{width:100%}.actions select{flex:1}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="brand">
+      <div class="logo">SA</div>
+      <div><strong>SD AISYIYAH SLAWI</strong><small>DASHBOARD HASIL SURVEI</small></div>
+    </div>
+    <h1>Survei Penerapan Pembelajaran<br>5 Hari Sekolah</h1>
+    <p class="subtitle">Rekapitulasi pendapat wali santri SD Aisyiyah Slawi</p>
+  </header>
+
+  <main class="wrap" id="app">
+    <div class="toolbar">
+      <div>
+        <div class="status"><span class="dot" id="statusDot"></span><span id="statusText">Menghubungkan ke Google Sheets…</span></div>
+        <div class="updated" id="updatedAt">Menunggu data pertama</div>
+      </div>
+      <div class="actions">
+        <select id="classFilter" aria-label="Filter kelas"><option value="Semua">Semua Kelas</option></select>
+        <button class="primary" id="refreshBtn">↻ Perbarui</button>
+      </div>
+    </div>
+    <div class="error" id="errorBox"></div>
+
+    <section class="stats">
+      <article class="card stat"><div class="stat-label">TOTAL RESPONDEN</div><div class="stat-value" id="total">—</div><div class="stat-note">Respons yang tercatat</div></article>
+      <article class="card stat"><div class="stat-label">SANGAT SETUJU</div><div class="stat-value" id="strong">—</div><div class="stat-note">Persentase dari responden</div></article>
+      <article class="card stat"><div class="stat-label">SETUJU</div><div class="stat-value" id="agree">—</div><div class="stat-note">Persentase dari responden</div></article>
+      <article class="card stat"><div class="stat-label">KURANG SETUJU</div><div class="stat-value" id="less">—</div><div class="stat-note">Persentase dari responden</div></article>
+      <article class="card stat"><div class="stat-label">TIDAK SETUJU</div><div class="stat-value" id="no">—</div><div class="stat-note">Persentase dari responden</div></article>
+    </section>
+
+    <section class="content-grid">
+      <article class="card panel">
+        <div class="panel-head"><div><h2>Komposisi Pendapat Wali Santri</h2><p>Distribusi jawaban berdasarkan pilihan responden</p></div></div>
+        <div class="chart-area">
+          <div class="donut" id="donut"><div class="donut-center"><b id="donutTotal">0</b><span>RESPONDEN</span></div></div>
+          <div class="legend" id="legend"></div>
+        </div>
+      </article>
+      <article class="card panel">
+        <div class="panel-head"><div><h2>Ringkasan Hasil</h2><p>Proporsi setiap pilihan jawaban</p></div></div>
+        <div class="bar-list" id="summaryBars"></div>
+      </article>
+    </section>
+
+    <section class="content-grid">
+      <article class="card panel">
+        <div class="panel-head"><div><h2>Rekapitulasi per Kelas</h2><p>Jumlah responden dan komposisi jawaban</p></div></div>
+        <div style="overflow-x:auto">
+          <table class="class-table"><thead><tr><th>Kelas</th><th class="num">Responden</th><th class="num">Dukungan</th><th class="num">Kurang/Tidak</th></tr></thead><tbody id="classRows"></tbody></table>
+        </div>
+      </article>
+      <article class="card panel">
+        <div class="panel-head"><div><h2>Alasan dan Masukan Wali Santri</h2><p>Jawaban terbuka (identitas responden tidak ditampilkan)</p></div></div>
+        <div class="reason-list" id="reasons"></div>
+      </article>
+    </section>
+    <div class="footer">SD Aisyiyah Slawi · Dashboard diperbarui otomatis dari Google Sheets</div>
+  </main>
+
+<script>
+/* ==========================================================
+   PENGATURAN WAJIB:
+   Tempel URL Web App Apps Script pada variabel API_URL.
+   Contoh: https://script.google.com/macros/s/AKfy.../exec
+   ========================================================== */
+const API_URL = "https://script.google.com/macros/s/AKfycbzSAWV_WL2OOj6qhKFLIvxu8WHKkDcCWxBhjByQ3Op0U0pT06cdaeMrNnSZNYHOaua1Aw/exec";
+const REFRESH_INTERVAL_MS = 60000;
+
+const CHOICES = ["Sangat Setuju","Setuju","Kurang Setuju","Tidak Setuju"];
+const COLORS = {"Sangat Setuju":"#2878c7","Setuju":"#159b8b","Kurang Setuju":"#e7a93b","Tidak Setuju":"#d65b62"};
+let latestData = null;
+
+const $ = id => document.getElementById(id);
+const fmt = n => new Intl.NumberFormat("id-ID").format(n || 0);
+const pct = (n,total) => total ? Math.round(n/total*100) : 0;
+const emptyChoices = () => Object.fromEntries(CHOICES.map(c=>[c,0]));
+
+function showError(message){
+  $("errorBox").textContent = message;
+  $("errorBox").style.display = "block";
+  $("statusText").textContent = "Gagal memuat data";
+  $("statusDot").classList.add("off");
+}
+function hideError(){ $("errorBox").style.display = "none"; }
+function loadData(){
+  if(!API_URL || API_URL.includes("TEMPEL_URL")){
+    showError("Dashboard belum terhubung. Isi API_URL dengan URL Web App Apps Script pada bagian pengaturan di file index.html.");
+    return;
+  }
+  $("app").classList.add("loading");
+  const old = document.getElementById("jsonp-loader"); if(old) old.remove();
+  const callbackName = "dashboardCallback";
+  window[callbackName] = data => {
+    $("app").classList.remove("loading");
+    if(!data || !data.ok){ showError((data && data.message) || "Respons dari server tidak valid."); return; }
+    latestData = data; hideError(); render(data);
+    $("statusText").textContent = "Terhubung · pembaruan otomatis setiap 1 menit";
+    $("statusDot").classList.remove("off");
+    $("updatedAt").textContent = "Data diperbarui: " + new Date(data.updatedAt || Date.now()).toLocaleString("id-ID");
+    delete window[callbackName];
+  };
+  const script = document.createElement("script");
+  script.id = "jsonp-loader";
+  script.onerror = () => { $("app").classList.remove("loading"); showError("Tidak dapat mengambil data. Periksa URL Apps Script, izin akses Web App, dan koneksi internet."); delete window[callbackName]; };
+  script.src = API_URL + (API_URL.includes("?") ? "&" : "?") + "callback=" + callbackName + "&_=" + Date.now();
+  document.head.appendChild(script);
+}
+function render(data){
+  const selected = $("classFilter").value;
+  const classes = data.classes || [];
+  $("classFilter").innerHTML = '<option value="Semua">Semua Kelas</option>' + classes.map(c=>`<option value="${esc(c.name)}">${esc(c.name)}</option>`).join("");
+  $("classFilter").value = classes.some(c=>c.name===selected) ? selected : "Semua";
+  const chosenClass = $("classFilter").value;
+  const subset = chosenClass==="Semua" ? data : (classes.find(c=>c.name===chosenClass) || {total:0,choices:emptyChoices()});
+  const total = subset.total || 0, choices = subset.choices || emptyChoices();
+  $("total").textContent = fmt(total);
+  $("strong").textContent = pct(choices["Sangat Setuju"],total)+"%";
+  $("agree").textContent = pct(choices["Setuju"],total)+"%";
+  $("less").textContent = pct(choices["Kurang Setuju"],total)+"%";
+  $("no").textContent = pct(choices["Tidak Setuju"],total)+"%";
+  $("donutTotal").textContent = fmt(total);
+  renderDonut(choices,total); renderBars(choices,total); renderClasses(classes); renderReasons(data.reasons || []);
+}
+function renderDonut(choices,total){
+  let start=0; const parts=CHOICES.map(c=>{const end=start+(total?choices[c]/total*100:0);const p=`${COLORS[c]} ${start}% ${end}%`;start=end;return p;});
+  $("donut").style.background=total?`conic-gradient(${parts.join(",")})`:"#e9eef4";
+  $("legend").innerHTML=CHOICES.map(c=>`<div class="legend-row"><span class="legend-label"><i class="swatch" style="background:${COLORS[c]}"></i>${c}</span><b>${fmt(choices[c])} <span style="color:#8492a5;font-weight:500">(${pct(choices[c],total)}%)</span></b></div>`).join("");
+}
+function renderBars(choices,total){
+  $("summaryBars").innerHTML=CHOICES.map(c=>`<div><div class="bar-item-head"><span>${c}</span><b>${fmt(choices[c])} · ${pct(choices[c],total)}%</b></div><div class="bar-track"><div class="bar-fill" style="width:${pct(choices[c],total)}%;background:${COLORS[c]}"></div></div></div>`).join("");
+}
+function renderClasses(classes){
+  $("classRows").innerHTML=classes.length?classes.map(c=>{
+    const s=c.choices["Sangat Setuju"]+c.choices["Setuju"], other=c.choices["Kurang Setuju"]+c.choices["Tidak Setuju"];
+    return `<tr><td><b>${esc(c.name)}</b></td><td class="num">${fmt(c.total)}</td><td class="num"><span class="pill">${pct(s,c.total)}%</span></td><td class="num">${pct(other,c.total)}%</td></tr>`;
+  }).join(""):'<tr><td colspan="4" class="empty">Belum ada data kelas.</td></tr>';
+}
+function renderReasons(reasons){
+  $("reasons").innerHTML=reasons.length?reasons.map(r=>`<div class="reason">${esc(r)}</div>`).join(""):'<div class="empty">Belum ada alasan atau masukan yang diisi.</div>';
+}
+function esc(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+$("refreshBtn").addEventListener("click",loadData);
+$("classFilter").addEventListener("change",()=>{if(latestData)render(latestData);});
+loadData();
+setInterval(loadData,REFRESH_INTERVAL_MS);
+</script>
+</body>
+</html>
